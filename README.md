@@ -1,89 +1,135 @@
 # Asset Management System
 
-Projeto de mockup visual para um sistema de gestão patrimonial, com foco em melhorar o layout, a hierarquia visual e a usabilidade do painel administrativo.
+Sistema de gestão patrimonial desenvolvido como interface visual para cadastro, consulta e controle de patrimônio da organização.
 
-## Objetivo do projeto
+## Descrição geral
 
-Este repositório contém uma interface moderna e responsiva para um sistema de patrimônio, com a proposta de substituir um layout mais simples por uma experiência visual mais profissional e amigável.
+Este projeto foi pensado para facilitar o gerenciamento de itens patrimoniais, como computadores, móveis, equipamentos, materiais e demais bens utilizados pela empresa.
 
-A estrutura foi desenvolvida para simular um painel administrativo com:
+A aplicação permite que o usuário cadastre novos patrimônios, consulte registros já existentes, filtre itens por status, acompanhe informações importantes e tenha uma visão geral do patrimônio em um painel administrativo.
 
-- menu lateral navegável;
-- dashboard com indicadores e resumo;
-- formulário de cadastro de patrimônio;
-- consulta e busca;
-- listagem de itens com ações;
-- área de relatórios.
+Este repositório representa a parte visual e funcional inicial do sistema, com foco em experiência do usuário, organização da interface e funcionamento básico das telas.
 
-## O que está incluso
+## Como o usuário utiliza o sistema
 
 ### 1. Dashboard
-Painel principal com indicadores visuais do patrimônio cadastrado:
+Ao entrar no sistema, o usuário visualiza o painel principal com os indicadores gerais, como:
 
-- total de itens;
-- itens em uso;
-- itens baixados;
-- valor acumulado;
-- resumo gráfico por estado;
-- atividade recente.
+- total de patrimônios cadastrados;
+- quantidade de itens em uso;
+- quantidade de itens baixados;
+- valor acumulado do patrimônio;
+- visão resumida por situação do item.
+
+Esse módulo serve como central de controle, permitindo que o responsável tenha uma visão rápida do estado geral do patrimônio da empresa.
 
 ### 2. Cadastro de patrimônio
-Seção para registrar novos itens com campos como:
+Na tela de cadastro, o usuário preenche as informações do bem a ser registrado, como:
 
-- etiqueta;
-- produto;
+- etiqueta do patrimônio;
+- nome do produto;
 - nota fiscal;
 - data de aquisição;
 - fornecedor;
-- valor;
+- valor de aquisição;
 - local de uso;
 - estado de conservação;
-- observação.
+- observação adicional.
+
+Esse processo permite manter um registro organizado e centralizado dos bens da organização.
 
 ### 3. Listagem de patrimônios
-Tabela com os principais itens cadastrados, incluindo:
+Na listagem, os itens cadastrados aparecem em tabela, com informações como:
 
-- busca por texto;
-- filtro por estado;
-- ações de edição e exclusão;
-- status visual com badges coloridos;
-- layout responsivo para telas menores.
+- etiqueta;
+- produto;
+- data de aquisição;
+- valor;
+- estado atual;
+- local de uso;
+- ações de edição e exclusão.
+
+O usuário pode também consultar e localizar itens rapidamente por busca textual ou por filtro de estado.
 
 ### 4. Consulta
-Área dedicada para pesquisar patrimônios por:
+A tela de consulta permite procurar patrimônio por informações importantes, como:
 
 - etiqueta;
 - nome do produto;
-- nota fiscal;
+- fornecedor;
 - local de uso;
-- outros diferenciais do cadastro.
+- outros dados principais do cadastro.
+
+Essa função ajuda a encontrar um item específico sem ter que percorrer toda a lista manualmente.
 
 ### 5. Relatórios
-Seção para visualização de relatórios administrativas, com cartões informativos para:
+A área de relatórios oferece uma visão administrativa dos itens, com estrutura para geração de dados por categoria, como:
 
 - inventário geral;
-- itens em uso;
+- patrimônios em uso;
 - itens em manutenção.
 
-## Estrutura dos arquivos
+Esses relatórios servem para dar suporte a decisões, auditoria e controle interno.
 
-- `index.html` — estrutura principal do sistema e páginas das seções.
-- `styles.css` — estilos visuais, responsividade, layout, botões, cards, tabelas e formulários.
-- `app.js` — interações do painel, navegação entre seções, filtro e notificações.
+## Principais recursos da aplicação
+
+- menu lateral com navegação por módulos;
+- painel visual com indicadores principais;
+- formulário de cadastro de patrimônio;
+- listagem organizada em tabela;
+- filtros e busca;
+- controle de status dos itens;
+- ações de edição e exclusão demonstrativas;
+- notificações visuais para feedback do usuário;
+- layout responsivo para desktop e telas menores.
+
+## Ferramentas e fluxo de uso
+
+O sistema foi pensado para uso por um usuário administrativo, normalmente responsável por:
+
+- registrar novos equipamentos e itens do patrimônio;
+- atualizar informações já existentes;
+- identificar itens em uso, manutenção ou baixados;
+- consultar rapidamente qualquer bem;
+- garantir que o inventário esteja organizado.
+
+A interface foi organizada para permitir uso simples, com navegação direta entre as telas e com foco em rapidez e produtividade.
+
+## Tecnologias e linguagens utilizadas
+
+### Front-end
+
+O desenvolvimento visual foi realizado com as seguintes tecnologias:
+
+- HTML5
+- CSS3
+- JavaScript
+
+### Estrutura do código
+
+- `index.html` — estrutura das telas e conteúdo principal do sistema.
+- `styles.css` — estilos visuais, layout responsivo, componentes e identidade visual.
+- `app.js` — interações do sistema, filtros, navegação, paginação e mensagens de feedback.
 - `README.md` — documentação do projeto.
+
+## Linguagens principais do desenvolvimento
+
+- HTML: estrutura da interface e organização das telas;
+- CSS: design, espaçamento, cores, bordas, alinhamento, responsividade e identidade visual;
+- JavaScript: interações do usuário, filtros, navegação entre seções, carregamento de dados e notificações.
 
 ## Como executar
 
-Como este é um mockup front-end estático, não é necessário instalar dependências.
+Como este projeto é um mockup front-end estático, não há dependências externas para instalação.
 
 ### Opção 1: abrir diretamente no navegador
 
-1. Baixe ou clone o repositório.
-2. Abra o arquivo `index.html` em qualquer navegador moderno.
+1. Faça o download ou clone o repositório.
+2. Abra o arquivo `index.html` em um navegador moderno.
 
-### Opção 2: usar servidor local leve
+### Opção 2: usar um servidor local simples
 
-Se preferir, você pode rodar em um servidor simples com Python:
+No terminal, execute:
 
 ```bash
 python -m http.server 8000
@@ -95,62 +141,41 @@ Depois acesse:
 http://localhost:8000
 ```
 
-## Tecnologias utilizadas
-
-### CSS utilizado
-
-Foi utilizado CSS puro, sem framework de UI.
-
-Arquivo principal:
-
-- `styles.css`
-
-Características:
-
-- variáveis CSS (`:root`) para padronizar cores;
-- layout com flexbox e grid;
-- design responsivo com `@media` queries;
-- componentes personalizados para cards, botões, badges, formulário e tabela;
-- estilos visuais próprios para menu lateral, dashboard e seções internas.
-
-Não foi utilizado Bootstrap, Tailwind CSS, Materialize ou outro framework CSS.
-
-### JavaScript utilizado
-
-Arquivo:
-
-- `app.js`
-
-Ele foi usado para:
-
-- alternar entre as seções do sistema;
-- controlar o menu lateral em mobile;
-- aplicar busca e filtros na tabela;
-- mostrar toasts/notificações;
-- simular ações de edição, exclusão e relatórios.
-
 ## Observações importantes
 
-Este projeto é uma interface visual de demonstração. Ele não contém:
+Este projeto representa uma interface funcional de demonstração. Ele foi criado para simular o uso do sistema e validar a experiência visual do usuário.
 
-- autenticação real;
-- conexão com banco de dados;
+Ele ainda não contém:
+
+- autenticação de usuários;
+- integração com banco de dados real;
 - persistência de dados em backend;
-- validação de segurança em produção.
+- login administrativo;
+- exportação em PDF/Excel;
+- conexão com API externa.
 
-Ele serve como base visual para um sistema real, podendo ser integrado a um backend posteriormente.
+## Objetivo da versão atual
 
-## Possíveis evoluções futuras
+A versão atual foi criada para demonstrar a proposta visual do sistema, com foco em:
 
-- integração com API REST;
-- autenticação de usuário;
-- persistência de dados em banco;
-- exportação para PDF/Excel;
-- filtro avançado por data e fornecedor;
-- layout de acesso com perfis administrativos;
-- criação de páginas separadas para cadastro, edição e visualização detalhada;
-- suporte a temas claro/escuro.
+- melhorar a aparência do painel;
+- facilitar o entendimento do usuário;
+- deixar a interface mais moderna e profissional;
+- servir como base para evoluções futuras na implementação completa.
 
-## Licença
+## Evolução futura sugerida
 
-Este projeto foi desenvolvido como mockup interno e pode ser adaptado conforme a necessidade da equipe ou do cliente.
+- integração com banco de dados;
+- autenticação e autorização;
+- API para consulta e cadastro de itens;
+- exportação de relatórios;
+- paginação real no backend;
+- uso de bibliotecas de ícones e componentes;
+- suporte a múltiplos perfis de usuário;
+- temas e personalizações visuais.
+
+## Conclusão
+
+O Asset Management System foi desenvolvido para facilitar o controle patrimonial de uma organização, permitindo registro, consulta, organização e acompanhamento de bens de forma prática e visualmente clara.
+
+A aplicação foi construída com HTML, CSS e JavaScript, mantendo uma estrutura simples, direta e fácil de evoluir conforme o sistema real for implementado.
