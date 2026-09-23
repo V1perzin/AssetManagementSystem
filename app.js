@@ -3,6 +3,9 @@ const breadcrumbTitle = document.querySelector('#breadcrumbTitle');
 const sidebar = document.querySelector('#sidebar');
 const overlay = document.querySelector('#sidebarOverlay');
 const toast = document.querySelector('#toast');
+const tableBody = document.querySelector('#assetRows');
+const tableSearch = document.querySelector('#tableSearch');
+const statusFilter = document.querySelector('#statusFilter');
 
 const titles = {
   dashboard: 'Dashboard',
@@ -11,6 +14,32 @@ const titles = {
   consulta: 'Consultar patrimônio',
   relatorios: 'Relatórios'
 };
+
+const patrimonios = [
+  { etiqueta: '0001', produto: 'Fragmentadora Kobra 245', notaFiscal: '8823', data: '28/09/2023', fornecedor: 'Casas das Máquinas', valor: 'R$ 9.350,00', estado: 'Em uso', local: 'Setor interno · Sala 01' },
+  { etiqueta: '0002', produto: 'Mesa de trabalho executiva', notaFiscal: '4712', data: '05/02/2025', fornecedor: 'Móveis & Cia', valor: 'R$ 1.280,00', estado: 'Em uso', local: 'Escritório administrativo' },
+  { etiqueta: '0003', produto: 'Escaner de documentos', notaFiscal: '5581', data: '10/03/2024', fornecedor: 'Tech Print', valor: 'R$ 2.450,00', estado: 'Em uso', local: 'Recepção' },
+  { etiqueta: '0004', produto: 'Notebook Dell Latitude', notaFiscal: '1032750', data: '22/04/2025', fornecedor: 'Lenovo', valor: 'R$ 3.607,99', estado: 'Em uso', local: 'Setor TI' },
+  { etiqueta: '0005', produto: 'Impressora multifuncional', notaFiscal: '2217', data: '18/07/2024', fornecedor: 'PrintLine', valor: 'R$ 1.899,00', estado: 'Manutenção', local: 'Setor de manutenção' },
+  { etiqueta: '0006', produto: 'Cadeira ergonômica', notaFiscal: '3319', data: '09/01/2023', fornecedor: 'Fábrica de Moveis', valor: 'R$ 540,00', estado: 'Em uso', local: 'Sala de reuniões' },
+  { etiqueta: '0007', produto: 'Projetor Epson', notaFiscal: '8840', data: '02/11/2022', fornecedor: 'Apex Visual', valor: 'R$ 4.200,00', estado: 'Em uso', local: 'Auditório' },
+  { etiqueta: '0008', produto: 'Servidor HP ProLiant', notaFiscal: '7711', data: '14/08/2024', fornecedor: 'DataCore', valor: 'R$ 18.900,00', estado: 'Em uso', local: 'Data center' },
+  { etiqueta: '0009', produto: 'Ar condicionado split', notaFiscal: '9091', data: '06/12/2024', fornecedor: 'Climatiza Tech', valor: 'R$ 2.980,00', estado: 'Em uso', local: 'Sala de diretoria' },
+  { etiqueta: '0010', produto: 'Microcomputador mini', notaFiscal: '6402', data: '17/03/2025', fornecedor: 'PC Market', valor: 'R$ 2.150,00', estado: 'Em uso', local: 'Operações' },
+  { etiqueta: '0011', produto: 'Estabilizador de energia', notaFiscal: '9124', data: '12/05/2024', fornecedor: 'Energia Segura', valor: 'R$ 880,00', estado: 'Em uso', local: 'Sala do almoxarifado' },
+  { etiqueta: '0012', produto: 'Duplicador de documentos', notaFiscal: '6755', data: '08/02/2021', fornecedor: 'Copy Master', valor: 'R$ 1.350,00', estado: 'Baixado', local: 'Setor administrativo' },
+  { etiqueta: '0013', produto: 'Mesa digitalizadora', notaFiscal: '1190', data: '22/09/2022', fornecedor: 'Office Tools', valor: 'R$ 790,00', estado: 'Em uso', local: 'Financeiro' },
+  { etiqueta: '0014', produto: 'Televisão 55 polegadas', notaFiscal: '7752', data: '11/06/2023', fornecedor: 'TV Central', valor: 'R$ 3.450,00', estado: 'Em uso', local: 'Sala de espera' },
+  { etiqueta: '0015', produto: 'Roteador Wi-Fi corporativo', notaFiscal: '2874', data: '16/04/2025', fornecedor: 'Net Connect', valor: 'R$ 1.120,00', estado: 'Em uso', local: 'Sala de rede' },
+  { etiqueta: '0016', produto: 'Balança de precisão', notaFiscal: '1534', data: '03/01/2023', fornecedor: 'Lugatti', valor: 'R$ 670,00', estado: 'Em uso', local: 'Laboratório' },
+  { etiqueta: '0017', produto: 'Armário metálico', notaFiscal: '4729', data: '20/02/2024', fornecedor: 'Segurança Max', valor: 'R$ 1.980,00', estado: 'Em uso', local: 'Almoxarifado central' },
+  { etiqueta: '0018', produto: 'Monitor 27 polegadas', notaFiscal: '1037', data: '25/08/2025', fornecedor: 'Vision Tec', valor: 'R$ 1.660,00', estado: 'Em uso', local: 'Setor de faturamento' },
+  { etiqueta: '0019', produto: 'Leitor de código de barras', notaFiscal: '3348', data: '19/06/2022', fornecedor: 'Barcode Pro', valor: 'R$ 840,00', estado: 'Em uso', local: 'Expedição' },
+  { etiqueta: '0020', produto: 'Câmera de segurança', notaFiscal: '9029', data: '09/09/2024', fornecedor: 'Vision Safe', valor: 'R$ 2.310,00', estado: 'Manutenção', local: 'Recepção externa' }
+];
+
+let currentPage = 1;
+let visibleLimit = 20;
 
 function showSection(id) {
   const target = document.getElementById(id) || document.getElementById('dashboard');
@@ -57,23 +86,14 @@ document.querySelectorAll('.report-card .button').forEach(button => {
   button.addEventListener('click', () => notify('Relatório preparado para geração.'));
 });
 
-/* Paginação da lista: começa com 100 itens e permite carregar mais sob demanda. */
 const tablePanel = document.querySelector('.table-panel');
-const assetRows = document.querySelector('#assetRows');
-const allRows = [...assetRows.querySelectorAll('tr')];
-const tableSearch = document.querySelector('#tableSearch');
-const statusFilter = document.querySelector('#statusFilter');
-let visibleLimit = 100;
-let currentPage = 1;
-
 const paginationStyles = document.createElement('style');
 paginationStyles.textContent = `
   .pagination-bar{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:15px 18px;border-top:1px solid var(--border);color:var(--muted);font-size:12px}
   .pagination-info{white-space:nowrap}.pagination-actions{display:flex;align-items:center;gap:8px}
-  .page-size{position:relative}.page-size select{min-width:112px;padding:8px 28px 8px 10px;border:1px solid var(--border);border-radius:7px;background:#fff;color:var(--text);font:inherit;cursor:pointer}
   .page-button{min-width:34px;height:34px;padding:0 10px;border:1px solid var(--border);border-radius:7px;background:#fff;color:var(--text);cursor:pointer}.page-button:hover:not(:disabled){border-color:var(--primary);color:var(--primary)}.page-button:disabled{cursor:not-allowed;opacity:.45}
   .load-more{border:0;background:#eff6ff;color:var(--primary);font:inherit;font-weight:700;cursor:pointer}.load-more:hover{text-decoration:underline}
-  @media(max-width:760px){.pagination-bar{align-items:flex-start;flex-direction:column}.pagination-actions{width:100%;justify-content:space-between}.page-size{order:2}}
+  @media(max-width:760px){.pagination-bar{flex-direction:column;align-items:flex-start}.pagination-actions{width:100%;justify-content:space-between}}
 `;
 document.head.appendChild(paginationStyles);
 
@@ -84,7 +104,6 @@ tablePanel.insertAdjacentHTML('beforeend', `
       <button class="page-button" id="previousPage" aria-label="Página anterior">‹</button>
       <span id="pageIndicator"></span>
       <button class="page-button" id="nextPage" aria-label="Próxima página">›</button>
-      <div class="page-size"><select id="pageSize" aria-label="Itens por página"><option value="100" selected>100 / página</option><option value="200">200 / página</option><option value="500">500 / página</option></select></div>
       <button class="button load-more" id="loadMore" type="button">＋ Listar mais</button>
     </div>
   </div>
@@ -94,86 +113,125 @@ const paginationInfo = document.querySelector('#paginationInfo');
 const pageIndicator = document.querySelector('#pageIndicator');
 const previousPage = document.querySelector('#previousPage');
 const nextPage = document.querySelector('#nextPage');
-const pageSize = document.querySelector('#pageSize');
 const loadMore = document.querySelector('#loadMore');
 
-function getFilteredRows() {
+function getStatusClass(status) {
+  if (status === 'Em uso') return 'badge-green';
+  if (status === 'Manutenção') return 'badge-amber';
+  return 'badge-red';
+}
+
+function getFilteredItems() {
   const query = tableSearch.value.trim().toLowerCase();
   const status = statusFilter.value.toLowerCase();
-  return allRows.filter(row => {
-    const text = row.textContent.toLowerCase();
-    return text.includes(query) && (!status || text.includes(status));
+
+  return patrimonios.filter(item => {
+    const text = `${item.etiqueta} ${item.produto} ${item.local} ${item.fornecedor}`.toLowerCase();
+    const matchesQuery = text.includes(query);
+    const matchesStatus = !status || item.estado.toLowerCase() === status;
+    return matchesQuery && matchesStatus;
   });
 }
 
-function renderTable() {
-  const filteredRows = getFilteredRows();
-  const totalPages = Math.max(1, Math.ceil(filteredRows.length / visibleLimit));
+function renderRows() {
+  const filtered = getFilteredItems();
+  const totalPages = Math.max(1, Math.ceil(filtered.length / visibleLimit));
   currentPage = Math.min(currentPage, totalPages);
   const start = (currentPage - 1) * visibleLimit;
-  const pageRows = filteredRows.slice(start, start + visibleLimit);
+  const pageItems = filtered.slice(start, start + visibleLimit);
 
-  allRows.forEach(row => { row.hidden = true; });
-  pageRows.forEach(row => { row.hidden = false; assetRows.appendChild(row); });
+  tableBody.innerHTML = '';
 
-  const first = filteredRows.length ? start + 1 : 0;
-  const last = Math.min(start + visibleLimit, filteredRows.length);
-  paginationInfo.textContent = `Mostrando ${first}–${last} de ${filteredRows.length} patrimônio(s)`;
+  pageItems.forEach(item => {
+    const row = document.createElement('tr');
+    row.innerHTML = `
+      <td><strong>${item.etiqueta}</strong></td>
+      <td>${item.produto}</td>
+      <td>${item.data}</td>
+      <td>${item.valor}</td>
+      <td><span class="badge ${getStatusClass(item.estado)}">${item.estado}</span></td>
+      <td>${item.local}</td>
+      <td>
+        <button class="table-action edit" aria-label="Editar">✎</button>
+        <button class="table-action delete" aria-label="Excluir">⌫</button>
+      </td>
+    `;
+    tableBody.appendChild(row);
+  });
+
+  const first = filtered.length ? start + 1 : 0;
+  const last = Math.min(start + visibleLimit, filtered.length);
+  paginationInfo.textContent = `Mostrando ${first}–${last} de ${filtered.length} patrimônio(s)`;
   pageIndicator.textContent = `${currentPage} / ${totalPages}`;
   previousPage.disabled = currentPage === 1;
-  nextPage.disabled = currentPage === totalPages;
-  loadMore.hidden = visibleLimit >= filteredRows.length || filteredRows.length === 0;
+  nextPage.disabled = currentPage >= totalPages;
+  loadMore.hidden = filtered.length <= visibleLimit || filtered.length === 0;
+
+  bindActions();
 }
 
-function updateTableFromFilter() {
-  currentPage = 1;
-  renderTable();
+function updatePage(reset = true) {
+  if (reset) currentPage = 1;
+  renderRows();
 }
 
-tableSearch.addEventListener('input', updateTableFromFilter);
-statusFilter.addEventListener('change', updateTableFromFilter);
-pageSize.addEventListener('change', () => {
-  visibleLimit = Number(pageSize.value);
-  currentPage = 1;
-  renderTable();
+tableSearch.addEventListener('input', () => updatePage());
+statusFilter.addEventListener('change', () => updatePage());
+
+previousPage.addEventListener('click', () => {
+  if (currentPage > 1) {
+    currentPage -= 1;
+    renderRows();
+  }
 });
-previousPage.addEventListener('click', () => { if (currentPage > 1) { currentPage -= 1; renderTable(); } });
-nextPage.addEventListener('click', () => { currentPage += 1; renderTable(); });
+
+nextPage.addEventListener('click', () => {
+  const filtered = getFilteredItems();
+  const totalPages = Math.max(1, Math.ceil(filtered.length / visibleLimit));
+  if (currentPage < totalPages) {
+    currentPage += 1;
+    renderRows();
+  }
+});
+
 loadMore.addEventListener('click', () => {
-  visibleLimit += 100;
-  pageSize.value = visibleLimit <= 100 ? '100' : visibleLimit <= 200 ? '200' : '500';
-  renderTable();
-  notify(`Mais itens carregados: até ${visibleLimit} por página.`);
+  visibleLimit += 20;
+  currentPage = 1;
+  renderRows();
+  notify('Mais itens carregados.');
 });
 
-function bindTableActions() {
+function bindActions() {
   document.querySelectorAll('.delete').forEach(button => {
-    button.onclick = () => {
+    button.addEventListener('click', () => {
       if (window.confirm('Deseja realmente excluir este patrimônio?')) {
-        button.closest('tr').remove();
+        const row = button.closest('tr');
+        const etiqueta = row.querySelector('strong').textContent;
+        const index = patrimonios.findIndex(item => item.etiqueta === etiqueta);
+        if (index >= 0) patrimonios.splice(index, 1);
+        row.remove();
+        renderRows();
         notify('Patrimônio removido.');
-        renderTable();
       }
-    };
+    });
   });
+
   document.querySelectorAll('.edit').forEach(button => {
-    button.onclick = () => notify('Modo de edição selecionado.');
+    button.addEventListener('click', () => notify('Modo de edição selecionado.'));
   });
 }
 
-bindTableActions();
-renderTable();
+function notify(message) {
+  toast.textContent = message;
+  toast.classList.add('show');
+  clearTimeout(window.toastTimer);
+  window.toastTimer = setTimeout(() => toast.classList.remove('show'), 2800);
+}
+
+renderRows();
 
 document.querySelector('#consultSearch').addEventListener('keydown', event => {
   if (event.key === 'Enter') notify('Consulta realizada.');
 });
 
 document.querySelector('.large-search .button').addEventListener('click', () => notify('Consulta realizada.'));
-
-let toastTimer;
-function notify(message) {
-  toast.textContent = message;
-  toast.classList.add('show');
-  clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => toast.classList.remove('show'), 2800);
-}
