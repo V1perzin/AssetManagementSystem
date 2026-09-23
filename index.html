@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Sistema de gestão patrimonial">
+  <title>Patrimônio | Dashboard</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar" aria-label="Navegação principal">
+      <div class="brand">
+        <div class="brand-mark" aria-hidden="true">P</div>
+        <div>
+          <strong>Sistema</strong>
+          <span>Patrimônio</span>
+        </div>
+        <button class="icon-button sidebar-close" id="closeSidebar" aria-label="Fechar menu">×</button>
+      </div>
+
+      <div class="profile-card">
+        <div class="avatar">A</div>
+        <div>
+          <strong>Administrador</strong>
+          <small>Gestão patrimonial</small>
+        </div>
+      </div>
+
+      <nav class="navigation">
+        <p class="nav-label">Visão geral</p>
+        <a class="nav-link active" href="#dashboard" data-section="dashboard"><span class="nav-icon">⌂</span> Dashboard</a>
+
+        <p class="nav-label">Patrimônio</p>
+        <a class="nav-link" href="#cadastro" data-section="cadastro"><span class="nav-icon">＋</span> Cadastrar patrimônio</a>
+        <a class="nav-link" href="#lista" data-section="lista"><span class="nav-icon">☷</span> Listar patrimônios</a>
+        <a class="nav-link" href="#consulta" data-section="consulta"><span class="nav-icon">⌕</span> Consultar</a>
+
+        <p class="nav-label">Administração</p>
+        <a class="nav-link" href="#relatorios" data-section="relatorios"><span class="nav-icon">▣</span> Relatórios</a>
+        <a class="nav-link logout" href="#sair"><span class="nav-icon">↪</span> Sair</a>
+      </nav>
+
+      <div class="sidebar-footer"><span class="status-dot"></span> Sistema online</div>
+    </aside>
+
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+    <main class="main-content">
+      <header class="topbar">
+        <button class="icon-button menu-toggle" id="openSidebar" aria-label="Abrir menu">☰</button>
+        <div class="breadcrumbs"><span>Início</span><b>/</b><strong id="breadcrumbTitle">Dashboard</strong></div>
+        <div class="topbar-actions">
+          <button class="notification-button" aria-label="Notificações">♧<span></span></button>
+          <div class="top-user"><span class="avatar avatar-small">A</span><span>Administrador</span></div>
+        </div>
+      </header>
+
+      <section class="page-section active-section" id="dashboard">
+        <div class="page-heading">
+          <div><p class="eyebrow">Visão geral</p><h1>Dashboard</h1><p class="subtitle">Acompanhe seus patrimônios em um só lugar.</p></div>
+          <a class="button button-primary" href="#cadastro" data-section="cadastro">＋ Novo patrimônio</a>
+        </div>
+
+        <div class="stats-grid">
+          <article class="stat-card blue"><div class="stat-icon">▦</div><div><span>Total de patrimônios</span><strong>152</strong><small>Itens cadastrados</small></div></article>
+          <article class="stat-card green"><div class="stat-icon">✓</div><div><span>Em uso</span><strong>152</strong><small>100% do total</small></div></article>
+          <article class="stat-card amber"><div class="stat-icon">!</div><div><span>Baixados</span><strong>0</strong><small>Nenhum item baixado</small></div></article>
+          <article class="stat-card purple"><div class="stat-icon">R$</div><div><span>Valor acumulado</span><strong>R$ 1,2 mi</strong><small>Valor dos bens</small></div></article>
+        </div>
+
+        <div class="content-grid">
+          <article class="panel chart-panel"><div class="panel-heading"><div><h2>Resumo dos patrimônios</h2><p>Distribuição por situação</p></div><span class="period-tag">Este ano</span></div><div class="chart-content"><div class="donut"><div><strong>152</strong><small>total</small></div></div><div class="legend"><span><i class="legend-dot green-dot"></i>Em uso <b>152</b></span><span><i class="legend-dot amber-dot"></i>Manutenção <b>0</b></span><span><i class="legend-dot red-dot"></i>Baixados <b>0</b></span></div></div></article>
+          <article class="panel activity-panel"><div class="panel-heading"><div><h2>Atividade recente</h2><p>Últimas movimentações</p></div><a href="#lista" data-section="lista">Ver tudo</a></div><div class="activity-list"><div class="activity-item"><span class="activity-icon green-bg">＋</span><div><strong>Novo patrimônio cadastrado</strong><small>Hoje, 08:30 · Etiqueta 0051</small></div></div><div class="activity-item"><span class="activity-icon blue-bg">✎</span><div><strong>Patrimônio atualizado</strong><small>Ontem, 16:42 · Etiqueta 0048</small></div></div><div class="activity-item"><span class="activity-icon gray-bg">▣</span><div><strong>Relatório gerado</strong><small>22/09/2026 · Inventário geral</small></div></div></div></article>
+        </div>
+      </section>
+
+      <section class="page-section" id="cadastro"><div class="page-heading"><div><p class="eyebrow">Patrimônio</p><h1>Cadastrar patrimônio</h1><p class="subtitle">Preencha os dados para adicionar um novo item.</p></div></div><article class="panel form-panel"><div class="panel-title"><span class="title-icon">＋</span><div><h2>Informações do patrimônio</h2><p>Campos marcados com * são obrigatórios.</p></div></div><form id="assetForm"><div class="form-grid"><label>Etiqueta do patrimônio *<input required placeholder="Ex.: 0052"></label><label>Produto *<input required placeholder="Nome do produto"></label><label>Nota fiscal<input placeholder="Número da nota fiscal"></label><label>Data de aquisição<input type="date"></label><label>Fornecedor<input placeholder="Nome do fornecedor"></label><label>Valor (R$)<input placeholder="0,00" inputmode="decimal"></label><label>Local de uso<input placeholder="Ex.: Sala de reuniões"></label><label>Estado de conservação<select><option>Em uso</option><option>Manutenção</option><option>Baixado</option></select></label><label class="full-width">Observação<textarea rows="4" placeholder="Adicione informações complementares..."></textarea></label></div><div class="form-actions"><button type="reset" class="button button-secondary">Limpar</button><button type="submit" class="button button-success">Salvar patrimônio</button></div></form></article></section>
+
+      <section class="page-section" id="lista"><div class="page-heading"><div><p class="eyebrow">Patrimônio</p><h1>Patrimônios cadastrados</h1><p class="subtitle">Consulte, edite e acompanhe os bens registrados.</p></div><a class="button button-primary" href="#cadastro" data-section="cadastro">＋ Novo patrimônio</a></div><article class="panel table-panel"><div class="table-toolbar"><div class="search-wrap"><span>⌕</span><input id="tableSearch" placeholder="Buscar por etiqueta, produto ou local..."></div><select id="statusFilter"><option value="">Todos os estados</option><option value="Em uso">Em uso</option><option value="Manutenção">Manutenção</option><option value="Baixado">Baixado</option></select></div><div class="table-scroll"><table><thead><tr><th>Etiqueta</th><th>Produto</th><th>Aquisição</th><th>Valor</th><th>Estado</th><th>Local</th><th>Ações</th></tr></thead><tbody id="assetRows"><tr><td><strong>0023</strong></td><td>Fragmentadora Kobra 245 TS</td><td>28/09/2023</td><td>R$ 9.350,00</td><td><span class="badge badge-green">Em uso</span></td><td>Setor interno · Sala 01</td><td><button class="table-action edit" aria-label="Editar">✎</button><button class="table-action delete" aria-label="Excluir">⌫</button></td></tr><tr><td><strong>0024</strong></td><td>Fragmentadora Kobra 310 TS HD</td><td>09/10/2024</td><td>R$ 38.500,00</td><td><span class="badge badge-amber">Manutenção</span></td><td>Setor de manutenção</td><td><button class="table-action edit" aria-label="Editar">✎</button><button class="table-action delete" aria-label="Excluir">⌫</button></td></tr><tr><td><strong>0048</strong></td><td>Encadernadora</td><td>05/02/2025</td><td>R$ 658,00</td><td><span class="badge badge-green">Em uso</span></td><td>Setor de manutenção</td><td><button class="table-action edit" aria-label="Editar">✎</button><button class="table-action delete" aria-label="Excluir">⌫</button></td></tr><tr><td><strong>0051</strong></td><td>Desktop ThinkCentre Neo 50Q</td><td>22/04/2025</td><td>R$ 3.607,99</td><td><span class="badge badge-green">Em uso</span></td><td>ONR / Consolidação</td><td><button class="table-action edit" aria-label="Editar">✎</button><button class="table-action delete" aria-label="Excluir">⌫</button></td></tr></tbody></table></div></article></section>
+
+      <section class="page-section" id="consulta"><div class="page-heading"><div><p class="eyebrow">Pesquisa</p><h1>Consultar patrimônio</h1><p class="subtitle">Encontre rapidamente um bem por etiqueta, produto ou nota fiscal.</p></div></div><article class="panel search-panel"><div class="large-search"><span>⌕</span><input id="consultSearch" placeholder="Digite a etiqueta, produto ou nota fiscal..."><button class="button button-primary">Pesquisar</button></div><div class="empty-state"><div class="empty-icon">⌕</div><h2>Comece sua pesquisa</h2><p>Digite um termo acima para visualizar os patrimônios correspondentes.</p></div></article></section>
+      <section class="page-section" id="relatorios"><div class="page-heading"><div><p class="eyebrow">Administração</p><h1>Relatórios</h1><p class="subtitle">Acesse os relatórios gerenciais do patrimônio.</p></div></div><div class="report-grid"><article class="panel report-card"><span class="report-icon blue-bg">▤</span><h2>Inventário geral</h2><p>Lista completa de patrimônios cadastrados.</p><button class="button button-secondary">Gerar relatório</button></article><article class="panel report-card"><span class="report-icon green-bg">✓</span><h2>Patrimônios em uso</h2><p>Itens atualmente em utilização.</p><button class="button button-secondary">Gerar relatório</button></article><article class="panel report-card"><span class="report-icon amber-bg">!</span><h2>Manutenções</h2><p>Itens que precisam de atenção.</p><button class="button button-secondary">Gerar relatório</button></article></div></section>
+      <footer class="footer">Sistema Patrimônio <span>·</span> Controle e gestão de bens</footer>
+    </main>
+  </div>
+  <div class="toast" id="toast" role="status"></div>
+  <script src="app.js"></script>
+</body>
+</html>
